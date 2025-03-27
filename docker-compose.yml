@@ -1,0 +1,21 @@
+services:
+
+  app:
+    image: ghcr.io/gethomepage/homepage:latest
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - HOMEPAGE_ALLOWED_HOSTS="*"
+    volumes:
+      - app_config:/app/config
+    networks:
+      proxy_apps:
+
+volumes:
+  app_config:
+
+networks:
+  proxy_apps:
+    name: proxy_apps
+    external: true
